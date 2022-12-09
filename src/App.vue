@@ -1,19 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>{{ test }}</h1>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: {},
+  data() {
+    return {
+      // loading: this.$store.state.loading,
+      test: null,
+    };
+  },
+  created() {
+    fetch(
+      "https://maps.googleapis.com/maps/api/geocode/json?language=ja&key=AIzaSyBJlb9fygUTGGIERrpCNovNaXZLgES1Wg8&address=2510047"
+    )
+      .then((response) => response.json())
+      .then((data) => (this.test = data));
+  },
+};
 </script>
 
 <style>
